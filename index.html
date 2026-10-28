@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 30px 15px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="registrationForm">
+    <h2>Registration Form</h2>
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password"
+           minlength="8" required>
+
+    <button type="submit">Register</button>
+    <p id="message" role="status"></p>
+</form>
+
+<script>
+    const form = document.getElementById("registrationForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (name === "") {
+            message.textContent = "Please enter your name.";
+            return;
+        }
+
+        if (!email.includes("@") || !email.includes(".")) {
+            message.textContent = "Please enter a valid email.";
+            return;
+        }
+
+        if (password.length < 8) {
+            message.textContent =
+                "Password must contain at least 8 characters.";
+            return;
+        }
+
+        message.textContent =
+            "Registration form validated successfully!";
+        message.style.color = "green";
+    });
+</script>
+
+</body>
+</html>
